@@ -1,7 +1,8 @@
 ﻿---
 jenkins:
   systemMessage: >
-    Welcome to the Chocolatine-Powered Marvin Jenkins Instance.
+    Welcome to the
+    Chocolatine-Powered Marvin Jenkins Instance.
   securityRealm:
     local:
       allowsSignup: false
@@ -35,8 +36,8 @@ jenkins:
               - user: "i_dont_know"
           - name: gorilla
             description: >
-              Group Obsessively Researching Innovation Linked to
-              Learning and Accomplishment
+              Group Obsessively Researching Innovation
+              Linked to Learning and Accomplishment
             permissions:
               - "Job/Build"
               - "Job/Workspace"
@@ -79,34 +80,22 @@ jobs:
         }
         disabled(false)
       }
+
       job('Tools/SEED') {
-              description('Seed job for creating dynamic jobs via Job DSL')
-              parameters {
-                stringParam(
-                  'GITHUB_NAME',
-                  '',
-                  'GitHub repo owner/repo_name (e.g. EpitechIT31000/chocolatine)'
-                )
-                stringParam(
-                  'DISPLAY_NAME',
-                  '',
-                  'Display name for the generated job'
-                )
-              }
-            scm {
-              git {
-                remote { url 'https://github.com/KassiGenin/my-marvin.git' }
-                branches '*/main'
-              }
-            }
-              wrappers {
-                preBuildCleanup()
-              }
-              steps {
-                jobDsl {
-                  targets('job_dsl.groovy')
-                  sandbox(false)
-                }
-              }
-              disabled(false)
-            }
+        description('Seed job for creating dynamic jobs via Job DSL')
+        parameters {
+          stringParam(
+            'GITHUB_NAME',
+            '',
+            'GitHub repo owner/repo_name (e.g.: EpitechIT31000/chocolatine)'
+          )
+          stringParam(
+            'DISPLAY_NAME',
+            '',
+            'Display name for the generated job'
+          )
+        }
+        scm {
+          git {
+            remote { url 'https://github.com/KassiGenin/my-marvin.git' }
+            branches '*/
