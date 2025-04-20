@@ -1,8 +1,4 @@
 ﻿---
-tool:
-  git:
-    installations:
-      - name: Default
 jenkins:
   systemMessage: >
     Welcome to the Chocolatine-Powered Marvin Jenkins Instance.
@@ -109,7 +105,17 @@ jobs:
               steps {
                 jobDsl {
                   targets('job_dsl.groovy')
+                  sandbox(false)
                 }
               }
               disabled(false)
             }
+unclassified:
+  jobDsl:
+    targets: "job_dsl.groovy"
+    sandbox: false
+    ignoreMissingFiles: false
+    removedJobAction: IGNORE
+    removedViewAction: IGNORE
+    ignoreExisting: false
+    failOnMissingPlugin: true
