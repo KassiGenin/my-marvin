@@ -1,5 +1,9 @@
 ﻿---
 jenkins:
+  tools:
+    git:
+      installations:
+        - name: Default
   systemMessage: >
     Welcome to the Chocolatine-Powered Marvin Jenkins Instance.
   securityRealm:
