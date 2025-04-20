@@ -1,21 +1,32 @@
 FROM jenkins/jenkins:lts
 
-# Passer en root pour installer des plugins
 USER root
 
-# Copier la liste des plugins et les installer
+# Disable the initial setup wizard via system property
+ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
+
+# Install plugins from the list
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt
 
-# Copier la configuration JCasc
+# Copy the Groovy init script to skip the wizard
+COPY init.groovy.d/disable-setup.groovy /usr/share/jenkins/ref/init.groovy.d/disable-setup.groovy
+
+# Copy Jenkins Configuration as Code files
 COPY casc_configs /var/jenkins_home/casc_configs
 
+# Copy the Job DSL script
 COPY job_dsl.groovy /var/jenkins_home/job_dsl.groovy
 
-# Indiquer à Configuration as Code où trouver le fichier YAML
+# Point JCasc at the configuration and set install state
 ENV CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/my_marvin.yml
+ENV CASC_JENKINS_INSTALL_STATE=RUNNING
 
-# Revenir à l'utilisateur Jenkins
+# Seed the last execution version before volume mount
+RUN echo "2.492.3" > /usr/share/jenkins/ref/jenkins.install.InstallUtil.lastExecVersion
+
+# Revert to the Jenkins user
 USER jenkins
 
+# Expose the default Jenkins HTTP port
 EXPOSE 8080

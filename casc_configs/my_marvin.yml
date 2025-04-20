@@ -1,5 +1,7 @@
+﻿---
 jenkins:
-  systemMessage: "Welcome to the Chocolatine-Powered Marvin Jenkins Instance."
+  systemMessage: >
+    Welcome to the Chocolatine-Powered Marvin Jenkins Instance.
   securityRealm:
     local:
       allowsSignup: false
@@ -17,20 +19,24 @@ jenkins:
       roles:
         global:
           - name: admin
-            description: "Marvin master"
+            description: >
+              Marvin master
             permissions:
               - "Overall/Administer"
             entries:
               - user: "chocolateen"
           - name: ape
-            description: "Pedagogical team member"
+            description: >
+              Pedagogical team member
             permissions:
               - "Job/Build"
               - "Job/Workspace"
             entries:
               - user: "i_dont_know"
           - name: gorilla
-            description: "Group Obsessively Researching Innovation Linked to Learning and Accomplishment"
+            description: >
+              Group Obsessively Researching Innovation Linked to
+              Learning and Accomplishment
             permissions:
               - "Job/Build"
               - "Job/Workspace"
@@ -42,7 +48,8 @@ jenkins:
             entries:
               - user: "vaugie_g"
           - name: assist
-            description: "Assistant"
+            description: >
+              Assistant
             permissions:
               - "Job/Read"
               - "Job/Workspace"
@@ -58,7 +65,11 @@ jobs:
       job('Tools/clone-repository') {
         description('Clone a Git repository passed as parameter')
         parameters {
-          stringParam('GIT_REPOSITORY_URL', '', 'Git URL of the repository to clone')
+          stringParam(
+            'GIT_REPOSITORY_URL',
+            '',
+            'Git URL of the repository to clone'
+          )
         }
         wrappers {
           preBuildCleanup()
@@ -72,8 +83,16 @@ jobs:
       job('Tools/SEED') {
         description('Seed job for creating dynamic jobs via Job DSL')
         parameters {
-          stringParam('GITHUB_NAME', '', 'GitHub repository owner/repo_name (e.g. EpitechIT31000/chocolatine)')
-          stringParam('DISPLAY_NAME', '', 'Display name for the generated job')
+          stringParam(
+            'GITHUB_NAME',
+            '',
+            'GitHub repo owner/repo_name (e.g. EpitechIT31000/chocolatine)'
+          )
+          stringParam(
+            'DISPLAY_NAME',
+            '',
+            'Display name for the generated job'
+          )
         }
         wrappers {
           preBuildCleanup()
