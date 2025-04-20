@@ -6,6 +6,11 @@ services:
       - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
+    environment:
+      - USER_CHOCOLATEEN_PASSWORD=${USER_CHOCOLATEEN_PASSWORD}
+      - USER_VAUGIE_G_PASSWORD=${USER_VAUGIE_G_PASSWORD}
+      - USER_I_DONT_KNOW_PASSWORD=${USER_I_DONT_KNOW_PASSWORD}
+      - USER_NASSO_PASSWORD=${USER_NASSO_PASSWORD}
 
 volumes:
   jenkins_home:

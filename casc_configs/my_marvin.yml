@@ -75,32 +75,37 @@ jobs:
           preBuildCleanup()
         }
         steps {
-          shell('git clone ${GIT_REPOSITORY_URL} .')
+          shell('git clone "$GIT_REPOSITORY_URL" .')
         }
         disabled(false)
       }
-
       job('Tools/SEED') {
-        description('Seed job for creating dynamic jobs via Job DSL')
-        parameters {
-          stringParam(
-            'GITHUB_NAME',
-            '',
-            'GitHub repo owner/repo_name (e.g. EpitechIT31000/chocolatine)'
-          )
-          stringParam(
-            'DISPLAY_NAME',
-            '',
-            'Display name for the generated job'
-          )
-        }
-        wrappers {
-          preBuildCleanup()
-        }
-        steps {
-          jobDsl {
-            targets('job_dsl.groovy')
-          }
-        }
-        disabled(false)
-      }
+              description('Seed job for creating dynamic jobs via Job DSL')
+              parameters {
+                stringParam(
+                  'GITHUB_NAME',
+                  '',
+                  'GitHub repo owner/repo_name (e.g. EpitechIT31000/chocolatine)'
+                )
+                stringParam(
+                  'DISPLAY_NAME',
+                  '',
+                  'Display name for the generated job'
+                )
+              }
+            scm {
+              git {
+                remote { url 'https://github.com/KassiGenin/my-marvin.git' }
+                branches '*/main'
+              }
+            }
+              wrappers {
+                preBuildCleanup()
+              }
+              steps {
+                jobDsl {
+                  targets('job_dsl.groovy')
+                }
+              }
+              disabled(false)
+            }
