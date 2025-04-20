@@ -15,7 +15,6 @@ RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt
 
 # Copy the Groovy init script to skip the wizard
 COPY init.groovy.d/disable-setup.groovy /usr/share/jenkins/ref/init.groovy.d/disable-setup.groovy
-COPY init.groovy.d/autoApproveAll.groovy /usr/share/jenkins/ref/init.groovy.d/
 
 # Copy Jenkins Configuration as Code files
 COPY casc_configs /var/jenkins_home/casc_configs

@@ -110,12 +110,3 @@ jobs:
               }
               disabled(false)
             }
-unclassified:
-  jobDsl:
-    targets: "job_dsl.groovy"
-    sandbox: false
-    ignoreMissingFiles: false
-    removedJobAction: IGNORE
-    removedViewAction: IGNORE
-    ignoreExisting: false
-    failOnMissingPlugin: true
