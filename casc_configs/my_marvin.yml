@@ -1,6 +1,6 @@
 ﻿---
 jenkins:
-  tools:
+  tool:
     git:
       installations:
         - name: Default
